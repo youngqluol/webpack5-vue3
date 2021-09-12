@@ -1,6 +1,6 @@
 const { merge } = require('webpack-merge');
 const commonConfig = require('./webpack.config');
-const { DefinePlugin, HotModuleReplacementPlugin } = require('webpack');
+// const { DefinePlugin, HotModuleReplacementPlugin } = require('webpack');
 const path = require('path');
 const resolve = p => path.resolve(__dirname, p);
 
@@ -18,6 +18,7 @@ module.exports = merge(commonConfig, {
     // new DefinePlugin({
     //   'process.env.NODE_ENV': JSON.stringify('development')
     // }),
-    new HotModuleReplacementPlugin()
+    // 在 webpack 5 中 HMR 已自动支持。无需配置
+    // new HotModuleReplacementPlugin()
   ]
 })
