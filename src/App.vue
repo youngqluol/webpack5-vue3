@@ -1,6 +1,6 @@
 <template>
   <div class="app-page" @click="handleClick">
-    app page1
+    app page23
   </div>
 </template>
 <script>
