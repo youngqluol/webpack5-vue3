@@ -1,6 +1,6 @@
 <template>
-  <div class="app-page">
-    app page
+  <div class="app-page" @click="handleClick">
+    app page1
   </div>
 </template>
 <script>
@@ -10,15 +10,19 @@ export default {
   setup() {
     const num = ref(0);
     const obj = reactive({title: 1});
+    const handleClick = () => {
+      console.log(111);
+    }
     return {
       num,
-      obj
+      obj,
+      handleClick
     }
   }
 }
 </script>
 <style lang="less" scoped>
 .app-page {
-  color: red;
+  color: green;
 }
 </style>
