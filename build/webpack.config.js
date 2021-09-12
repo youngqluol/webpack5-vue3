@@ -1,12 +1,15 @@
 const path = require('path');
 const resolve = p => path.resolve(__dirname, p);
+const { VueLoaderPlugin } = require('vue-loader/dist/index');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const htmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   entry: resolve('../src/main.js'),
 
   output: {
     filename: 'app.js',
-    path: resolve('./dist')
+    path: resolve('../dist')
   },
 
   module: {
@@ -44,5 +47,15 @@ module.exports = {
         exclude: /node_modules/
       }
     ]
-  }
+  },
+
+  plugins: [
+    new VueLoaderPlugin(),
+    new CleanWebpackPlugin(),
+    new htmlWebpackPlugin({
+      template: resolve('../public/index.html'),
+      filename: 'index.html',
+      inject: 'body'
+    })
+  ]
 }
