@@ -12,6 +12,7 @@ export default {
     const obj = reactive({title: 1});
     const handleClick = () => {
       console.log(111);
+      console.log(process.env.NODE_ENV);
     }
     return {
       num,
