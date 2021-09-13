@@ -15,6 +15,21 @@ let dllConfig = {
     filename: '[name].dll.js',
     library: '[name]_library' // 这里需要和webpack.DllPlugin中的`name: '[name]_library',`保持一致。
   },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            cacheDirectory: true,
+            presets: ['@babel/preset-env'],
+            plugins: ['@babel/plugin-transform-runtime']
+          }
+        }
+      },
+    ]
+  },
   plugins: [
     // 清除之前的dll文件
     new CleanWebpackPlugin({
