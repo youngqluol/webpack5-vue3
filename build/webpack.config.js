@@ -109,7 +109,7 @@ module.exports = {
     }),
     // 在dll里已经打包编译了，避免重复编译
     new webpack.DllReferencePlugin({
-      context: process.cwd(), // __dirname
+      context: __dirname,
       manifest: resolve('../public/vendor/vendor-manifest.json')
     })
   ]
