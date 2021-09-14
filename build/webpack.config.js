@@ -40,14 +40,7 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            cacheDirectory: true,
-            presets: ['@babel/preset-env'],
-            plugins: ['@babel/plugin-transform-runtime']
-          }
-        },
+        use: ['babel-loader'],
         include: resolve('../src')
       },
       // webpack5+ 用4种模块类型，来替换raw-loader/url-loader/file-loader
