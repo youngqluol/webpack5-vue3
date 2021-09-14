@@ -8,7 +8,7 @@ const chalk = require('chalk');
 let dllConfig = {
   mode: 'production',
   entry: {
-    vendor: ['vue']
+    vendor: ['vue', 'element-plus']
   },
   output: {
     path: resolve('../public/vendor'),
