@@ -27,7 +27,7 @@ let dllConfig = {
             plugins: ['@babel/plugin-transform-runtime']
           }
         }
-      },
+      }
     ]
   },
   plugins: [
