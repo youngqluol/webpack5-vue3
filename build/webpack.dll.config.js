@@ -61,7 +61,7 @@ webpack(dllConfig, (err, stats) => {
   );
 
   if (stats.hasErrors()) {
-    console.log(chalk.red('  Build failed with errors.\n'));
+    console.log(chalk.red('Build failed with errors.\n'));
     process.exit(1);
   }
 });
