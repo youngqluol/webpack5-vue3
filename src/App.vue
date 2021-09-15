@@ -8,6 +8,7 @@
   <div class="img1"></div>
   <div class="img2"></div>
   <demo-comp />
+  <div @click="promiseClick">点击</div>
 </template>
 <script>
 import { ref, reactive } from 'vue';
@@ -24,10 +25,23 @@ export default {
       console.log(111);
       console.log(process.env.NODE_ENV);
     };
+    function fn() {
+      return new Promise(resolve => {
+        setTimeout(() => {
+          console.log('promise');
+          resolve();
+        }, 2000);
+      });
+    }
+    async function promiseClick() {
+      await fn();
+      console.log('after promise');
+    }
     return {
       num,
       obj,
-      handleClick
+      handleClick,
+      promiseClick
     };
   }
 };
