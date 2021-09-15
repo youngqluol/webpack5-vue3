@@ -12,7 +12,7 @@ module.exports = {
   entry: resolve('../src/main.js'),
 
   output: {
-    filename: '[name].[hash].js',
+    filename: '[name].[contenthash].js',
     path: resolve('../dist')
   },
 
@@ -43,17 +43,17 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
+            cacheDirectory: true,
             presets: [
               [
                 '@babel/env',
                 {
                   modules: false,
-                  targets: {
-                    browsers: ['> 1%', 'last 2 versions', 'not ie <= 8']
-                  }
+                  targets: '> 1%, last 2 versions, not ie <= 8'
                 }
               ]
-            ]
+            ],
+            plugins: ['@babel/plugin-transform-runtime']
           }
         },
         exclude: /node_modules/
