@@ -1,7 +1,7 @@
 <template>
   <div class="demo-page">
     demo page
-    <el-button> 我是 ElButton </el-button>
+    <!-- <el-button> 我是 ElButton </el-button> -->
   </div>
 </template>
 <script>

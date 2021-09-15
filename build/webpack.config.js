@@ -40,8 +40,23 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        use: ['babel-loader'],
-        include: resolve('../src')
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              [
+                '@babel/env',
+                {
+                  modules: false,
+                  targets: {
+                    browsers: ['> 1%', 'last 2 versions', 'not ie <= 8']
+                  }
+                }
+              ]
+            ]
+          }
+        },
+        exclude: /node_modules/
       },
       // webpack5+ 用4种模块类型，来替换raw-loader/url-loader/file-loader
       // 参考：https://webpack.docschina.org/guides/asset-modules/
@@ -102,7 +117,7 @@ module.exports = {
     }),
     // 在dll里已经打包编译了，避免重复编译
     new webpack.DllReferencePlugin({
-      context: __dirname,
+      context: process.cwd(), // 注意与__dirname区分
       manifest: resolve('../public/vendor/vendor-manifest.json')
     })
   ]
