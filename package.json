@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack serve --color --progress --config build/webpack.dev.js",
-    "dll": "node build/webpack.dll.config.js",
+    "dll": "cross-env NODE_ENV=production node build/webpack.dll.config.js",
     "build:test": "cross-env NODE_ENV=test webpack --color --progress --config build/webpack.prod.js",
     "build": "cross-env NODE_ENV=production webpack --color --progress --config build/webpack.prod.js"
   },

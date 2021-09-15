@@ -8,21 +8,21 @@ const chalk = require('chalk');
 let dllConfig = {
   mode: 'production',
   entry: {
-    vendor: ['vue', 'element-plus']
+    vendor: ['vue']
   },
   output: {
     path: resolve('../public/vendor'),
     filename: '[name].dll.js',
-    library: '[name]_library' // 这里需要和webpack.DllPlugin中的`name: '[name]_library',`保持一致。
+    library: '[name]_library'
   },
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        use: ['babel-loader']
-      }
-    ]
-  },
+  // module: {
+  //   rules: [
+  //     {
+  //       test: /\.js$/,
+  //       use: ['babel-loader']
+  //     }
+  //   ]
+  // },
   plugins: [
     // 清除之前的dll文件
     new CleanWebpackPlugin({
@@ -31,8 +31,9 @@ let dllConfig = {
     // 定义插件
     new webpack.DllPlugin({
       path: resolve('../public/vendor/[name]-manifest.json'),
-      name: '[name]_library',
-      context: __dirname
+      name: '[name]_library', // 动态链接库的全局变量名称，需要和 output.library 中保持一致
+      context: __dirname,
+      entryOnly: true
     })
   ]
 };
