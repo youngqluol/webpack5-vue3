@@ -24,6 +24,7 @@ export default {
     const handleClick = () => {
       console.log(111);
       console.log(process.env.NODE_ENV);
+      console.log(__VUE_OPTIONS_API__);
     };
     function fn() {
       return new Promise(resolve => {

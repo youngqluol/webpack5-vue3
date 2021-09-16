@@ -14,9 +14,8 @@ module.exports = merge(commonConfig, {
     open: true
   },
   plugins: [
-    // 从 webpack v4 开始, 指定 mode 会自动地配置 DefinePlugin
+    // 从 webpack v4 开始, 指定 mode 会自动地配置 process.env.NODE_ENV
     // new DefinePlugin({
-    //   'process.env.NODE_ENV': JSON.stringify('development')
     // }),
     // 在 webpack 5 中 HMR 已自动支持。无需配置
     // new HotModuleReplacementPlugin()
