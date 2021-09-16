@@ -7,13 +7,20 @@ const chalk = require('chalk');
 
 let dllConfig = {
   mode: 'production',
+
+  target: ['web', 'es5'], // webpack5+下不加这个，会出现打包出来的bunder中还是有es6，费解
+
   entry: {
     vendor: ['vue']
   },
   output: {
     path: resolve('../public/vendor'),
     filename: '[name].dll.js',
-    library: '[name]_library'
+    library: '[name]_library',
+    environment: {
+      arrowFunction: false,
+      destructuring: false
+    }
   },
   // module: {
   //   rules: [
