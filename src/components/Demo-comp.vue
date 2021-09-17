@@ -7,9 +7,9 @@
 <script>
 export default {
   setup() {
-    
+
   },
-}
+};
 </script>
 <style lang="less" scoped>
 .demo-page {
