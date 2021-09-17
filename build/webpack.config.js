@@ -3,17 +3,16 @@ const resolve = p => path.resolve(__dirname, p);
 const { VueLoaderPlugin } = require('vue-loader/dist/index');
 const htmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 const webpack = require('webpack');
 const devMode = process.env.NODE_ENV !== 'production';
 
 module.exports = {
-  target: ['web', 'es5'], // webpack5+下不加这个，会出现打包出来的bunder中还是有es6，费解
+  target: ['web'],
 
   entry: resolve('../src/main.js'),
 
   output: {
-    filename: '[name].[contenthash].js',
+    filename: 'js/[name].[contenthash].js',
     path: resolve('../dist'),
     environment: {
       arrowFunction: false,
@@ -42,27 +41,11 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            cacheDirectory: true,
-            presets: [
-              [
-                '@babel/env',
-                {
-                  targets: '> 1%, last 2 versions, not ie <= 8',
-                  useBuiltIns: 'usage',
-                  corejs: '3'
-                }
-              ]
-            ],
-            plugins: [
-              '@babel/plugin-transform-runtime',
-              '@babel/plugin-proposal-class-properties',
-              '@babel/plugin-proposal-object-rest-spread'
-            ]
+        use: [
+          {
+            loader: 'babel-loader'
           }
-        },
+        ],
         exclude: /node_modules/
       },
       {
@@ -126,20 +109,7 @@ module.exports = {
       filename: 'index.html',
       inject: 'body'
     }),
-    new AddAssetHtmlPlugin({
-      // dll文件位置
-      filepath: resolve('../public/vendor/*.js'),
-      // dll 引用路径，请使用 绝对路径！！！
-      publicPath: '/vendor',
-      // dll最终输出的目录
-      outputPath: './vendor'
-    }),
-    // 在dll里已经打包编译了，避免重复编译
-    new webpack.DllReferencePlugin({
-      context: process.cwd(), // 注意与__dirname区分
-      manifest: resolve('../public/vendor/vendor-manifest.json')
-    }),
-    // 禁止vue options api
+    // 禁止vue options api，优化打包体积
     new webpack.DefinePlugin({
       __VUE_OPTIONS_API__: false
     })

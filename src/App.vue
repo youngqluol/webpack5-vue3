@@ -13,6 +13,7 @@
 <script>
 import { ref, reactive } from 'vue';
 import DemoComp from './components/Demo-comp.vue';
+import { ForTest } from './utils';
 
 export default {
   components: {
@@ -22,9 +23,9 @@ export default {
     const num = ref(0);
     const obj = reactive({ title: 1 });
     const handleClick = () => {
-      console.log(111);
       console.log(process.env.NODE_ENV);
       console.log(__VUE_OPTIONS_API__);
+      new ForTest();
     };
     function fn() {
       return new Promise(resolve => {
