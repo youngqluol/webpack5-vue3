@@ -1,8 +1,6 @@
 <template>
   <div class="app-page"
-       @click="handleClick">
-    app page2
-  </div>
+       @click="handleClick">app page2</div>
   <!-- <img src="./assets/J.png" alt="">
   <img src="./assets/logo.png" alt=""> -->
   <div class="img1"></div>
@@ -10,7 +8,7 @@
   <demo-comp />
   <div @click="promiseClick"
        :style="{ color: 'red' }">点击</div>
-  <div> {{ num }}</div>
+  <div>{{ num }}</div>
 </template>
 <script>
 import { ref, reactive } from 'vue';
@@ -52,19 +50,19 @@ export default {
 };
 </script>
 <style lang="less" scoped>
-  .app-page {
-    color: green;
-  }
-  .img1 {
-    width: 100px;
-    height: 100px;
-    background-image: url('./assets/J.png');
-    background-size: 100px 100px;
-  }
-  .img2 {
-    width: 100px;
-    height: 100px;
-    background-image: url('./assets/logo.png');
-    background-size: 100px 100px;
-  }
+.app-page {
+  color: green;
+}
+.img1 {
+  width: 100px;
+  height: 100px;
+  background-image: url('./assets/J.png');
+  background-size: 100px 100px;
+}
+.img2 {
+  width: 100px;
+  height: 100px;
+  background-image: url('./assets/logo.png');
+  background-size: 100px 100px;
+}
 </style>
