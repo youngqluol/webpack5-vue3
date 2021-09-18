@@ -7,7 +7,9 @@
 <script>
 export default {
   setup() {
-
+    function fn(num) {
+      // num++;
+    }
   },
 };
 </script>
