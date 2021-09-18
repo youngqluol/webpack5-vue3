@@ -13,7 +13,7 @@
 <script>
 import { ref, reactive } from 'vue';
 import DemoComp from '@/components/Demo-comp';
-import ForTest from './utils';
+// import ForTest from './utils';
 
 export default {
   components: {
@@ -26,8 +26,8 @@ export default {
       console.log(process.env.NODE_ENV);
       /* eslint-disable-next-line no-undef */
       console.log(__VUE_OPTIONS_API__);
-      const forTest = new ForTest();
-      const a = 1;
+      // const forTest = new ForTest();
+      // const a = 1;
     };
     function fn() {
       return new Promise(resolve => {
