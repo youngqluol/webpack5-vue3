@@ -27,6 +27,7 @@ export default {
       /* eslint-disable-next-line no-undef */
       console.log(__VUE_OPTIONS_API__);
       const forTest = new ForTest();
+      const a = 1;
     };
     function fn() {
       return new Promise(resolve => {
