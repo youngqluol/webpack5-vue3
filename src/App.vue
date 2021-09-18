@@ -8,12 +8,14 @@
   <div class="img1"></div>
   <div class="img2"></div>
   <demo-comp />
-  <div @click="promiseClick">点击</div>
+  <div @click="promiseClick"
+       :style="{ color: 'red' }">点击</div>
+  <div> {{ num }}</div>
 </template>
 <script>
 import { ref, reactive } from 'vue';
-import DemoComp from './components/Demo-comp.vue';
-import { ForTest } from './utils';
+import DemoComp from '@/components/Demo-comp';
+import ForTest from './utils';
 
 export default {
   components: {
@@ -24,8 +26,9 @@ export default {
     const obj = reactive({ title: 1 });
     const handleClick = () => {
       console.log(process.env.NODE_ENV);
+      /* eslint-disable-next-line no-undef */
       console.log(__VUE_OPTIONS_API__);
-      new ForTest();
+      const forTest = new ForTest();
     };
     function fn() {
       return new Promise(resolve => {

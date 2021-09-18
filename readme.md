@@ -10,6 +10,8 @@
 8. 代码拆分：splitChunk √
 9. 支持ts?
 10. 引入vuex、vue-router
+11. commit提交校验
+12. 自动部署
 
 ##### 二、最近更新
 1. 去掉dll配置，参考https://www.cnblogs.com/skychx/p/webpack-dllplugin.html
