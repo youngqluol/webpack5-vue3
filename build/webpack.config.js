@@ -61,7 +61,8 @@ module.exports = {
           loader: 'eslint-loader',
           options: {
             formatter: require('eslint-friendly-formatter'),
-            emitWarning: false
+            emitWarning: false,
+            quiet: process.env.NODE_ENV === 'production'
           }
         },
         include: [resolve('../src')]
