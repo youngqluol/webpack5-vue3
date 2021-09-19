@@ -21,15 +21,23 @@ if (process.env.npm_config_report) {
 }
 
 if (process.env.npm_config_zip) {
-  plugins.push(new FileManagerPlugin({
-    context: process.cwd(),
-    events: {
-      onEnd: {
-      // delete: [ './dist.zip'],
-        archive: [{ source: 'dist', destination: 'zip/dist.zip' }]
+  plugins.push(
+    new FileManagerPlugin({
+      context: __dirname,
+      events: {
+        onEnd: {
+          archive: [{ source: '../dist', destination: '../dist/dist.zip' }],
+          delete: [
+            '../dist/css/',
+            '../dist/imgs/',
+            '../dist/index.html',
+            '../dist/js/',
+            '../dist/fonts/'
+          ]
+        }
       }
-    }
-  }));
+    })
+  );
 }
 
 module.exports = merge(commonConfig, {
