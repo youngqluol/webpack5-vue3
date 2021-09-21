@@ -55,6 +55,12 @@ module.exports = merge(commonConfig, {
           test: /[\\/]node_modules[\\/]/,
           priority: 10,
           chunks: 'initial' // 只打包初始时依赖的第三方
+        },
+        element: {
+          name: 'element',
+          test: /[\\/]node_modules[\\/]element-plus[\\/]/,
+          priority: 20,
+          chunks: 'initial' // 只打包初始时依赖的第三方
         }
       }
     },
