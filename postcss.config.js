@@ -1,7 +1,7 @@
 module.exports = {
   plugins: [
     [
-      "autoprefixer",
+      'autoprefixer',
       {
         // 选项
       },
