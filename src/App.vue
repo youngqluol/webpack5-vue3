@@ -30,6 +30,7 @@ export default {
       // const a = 1;
     };
     function fn() {
+      console.log('before promise');
       return new Promise(resolve => {
         setTimeout(() => {
           console.log('promise');

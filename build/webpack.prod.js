@@ -5,17 +5,45 @@ const { merge } = require('webpack-merge');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const FileManagerPlugin = require('filemanager-webpack-plugin');
 const commonConfig = require('./webpack.config');
+
+const plugins = [
+  new MiniCssExtractPlugin({
+    filename: 'css/[name].[contenthash].css',
+    chunkFilename: '[id].[contenthash].css'
+  })
+];
+
+if (process.env.npm_config_report) {
+  plugins.push(new BundleAnalyzerPlugin());
+}
+
+if (process.env.npm_config_zip) {
+  plugins.push(
+    new FileManagerPlugin({
+      context: __dirname,
+      events: {
+        onEnd: {
+          archive: [{ source: '../dist', destination: '../dist/dist.zip' }],
+          delete: [
+            '../dist/css/',
+            '../dist/imgs/',
+            '../dist/index.html',
+            '../dist/js/',
+            '../dist/fonts/'
+          ]
+        }
+      }
+    })
+  );
+}
 
 module.exports = merge(commonConfig, {
   mode: 'production',
   devtool: 'source-map',
-  plugins: [
-    new MiniCssExtractPlugin({
-      filename: 'css/[name].[contenthash].css',
-      chunkFilename: '[id].[contenthash].css'
-    })
-  ],
+  plugins,
   optimization: {
     emitOnErrors: true, // 在编译时每当有错误时，就会 emit asset
     // 分离chunks
@@ -26,6 +54,12 @@ module.exports = merge(commonConfig, {
           name: 'vendor',
           test: /[\\/]node_modules[\\/]/,
           priority: 10,
+          chunks: 'initial' // 只打包初始时依赖的第三方
+        },
+        element: {
+          name: 'element',
+          test: /[\\/]node_modules[\\/]element-plus[\\/]/,
+          priority: 20,
           chunks: 'initial' // 只打包初始时依赖的第三方
         }
       }
