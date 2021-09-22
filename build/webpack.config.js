@@ -108,6 +108,11 @@ module.exports = {
     ]
   },
 
+  // 持久化缓存：https://webpack.docschina.org/configuration/cache/
+  // cache: {
+  //   type: 'filesystem'
+  // },
+
   resolve: {
     // 别名及扩展
     alias: {

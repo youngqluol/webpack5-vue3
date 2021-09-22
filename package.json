@@ -4,13 +4,14 @@
   "description": "webpack5 vue3 app",
   "private": true,
   "scripts": {
+    "precommit": "lint-staged",
     "dev": "webpack serve --color --progress --config build/webpack.dev.js",
     "build:test": "cross-env NODE_ENV=test webpack --color --progress --config build/webpack.prod.js",
     "build": "cross-env NODE_ENV=production webpack --color --progress --config build/webpack.prod.js",
     "prepare": "husky install"
   },
   "lint-staged": {
-    "*.{vue,js,ts}": "eslint --fix"
+    "src/**/*.{js,json,css,vue}": "eslint --fix"
   },
   "repository": {
     "type": "git",
