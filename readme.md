@@ -14,6 +14,7 @@
 12. 自动部署 √
 13. 单元测试?
 14. 首页完善
+15. 打包分析
 
 ##### 二、最近更新
 1. 【2021-09-17】去掉dll配置，原因参考https://www.cnblogs.com/skychx/p/webpack-dllplugin.html
