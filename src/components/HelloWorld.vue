@@ -1,20 +1,16 @@
 <template>
   <div class="demo-page">
-    demo page
-    <!-- <el-button> 我是 ElButton </el-button> -->
+    welcome to vue3 + webpack5
   </div>
 </template>
 <script>
 export default {
+  name: 'hello-world',
   setup() {
-    function fn(num) {
-      // num++;
-    }
   },
 };
 </script>
 <style lang="less" scoped>
 .demo-page {
-  color: red;
 }
 </style>
