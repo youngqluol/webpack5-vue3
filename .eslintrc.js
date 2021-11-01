@@ -51,7 +51,8 @@ module.exports = {
     'import/no-unresolved': 0, // eslint识别不了webpack路径别名，如：@、@src
     'import/extensions': 0, // 文件后缀
     'global-require': 0, // require('path')
-    'no-plusplus': 0 // ++、--
-    // 'no-param-reassign': 0 // 直接修改函数参数
+    'no-plusplus': 0, // ++、--
+    'linebreak-style': 0, // 换行符校验（mac、windows下换行符不一样）
+    'no-param-reassign': 0 // 直接修改函数参数
   }
 };

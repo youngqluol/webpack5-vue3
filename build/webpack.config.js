@@ -25,6 +25,8 @@ module.exports = {
 
   module: {
     rules: [
+      // style-loader: 使用多个style标签将CSS插入到DOM中，反应快
+      // MiniCssExtractPlugin: 将css抽离成单独的CSS文件，并行加载
       {
         test: /\.css$/,
         use: [
