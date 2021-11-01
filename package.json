@@ -8,7 +8,7 @@
     "dev": "webpack serve --color --progress --config build/webpack.dev.js",
     "build:test": "cross-env NODE_ENV=test webpack --color --progress --config build/webpack.prod.js",
     "build": "cross-env NODE_ENV=production webpack --color --progress --config build/webpack.prod.js",
-    "prepare": "husky install"
+    "prepare": "husky install && chmod 700 .husky/*"
   },
   "lint-staged": {
     "src/**/*.{js,json,css,vue}": "eslint --fix"
