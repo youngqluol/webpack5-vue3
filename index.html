@@ -1,22 +1,23 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Webpack5</title><link href="css/element.94acc5ecf242449d0519.css" rel="stylesheet"><link href="css/main.c1ea1a00c332027d4550.css" rel="stylesheet"></head><script>function calc(designWidth) {
-      var html = document.documentElement;
+<!doctype html><html lang="en"><head><meta charset="UTF-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Webpack5</title><script>function calc(designWidth) {
+        var html = document.documentElement;
 
-      function recalc() {
-        var dpi =
-          html.clientWidth > designWidth ? designWidth : html.clientWidth;
-        // 假设屏幕宽360，则计算公式： designWidth/360 = 100/fontSize
-        var fontSize = parseFloat((dpi / designWidth) * 100);
-        html.style.fontSize = fontSize + 'px';
-        // 解决浏览器及低端安卓版本的webview缩放
-        var changedFontSize = parseFloat(
-          window.getComputedStyle(html)['font-size']
-        );
-        if (Math.abs(fontSize - changedFontSize) > 0.1) {
-          html.style.fontSize = (fontSize * fontSize) / changedFontSize + 'px';
+        function recalc() {
+          var dpi =
+            html.clientWidth > designWidth ? designWidth : html.clientWidth;
+          // 假设屏幕宽360，则计算公式： designWidth/360 = 100/fontSize
+          var fontSize = parseFloat((dpi / designWidth) * 100);
+          html.style.fontSize = fontSize + 'px';
+          // 解决浏览器及低端安卓版本的webview缩放
+          var changedFontSize = parseFloat(
+            window.getComputedStyle(html)['font-size']
+          );
+          if (Math.abs(fontSize - changedFontSize) > 0.1) {
+            html.style.fontSize =
+              (fontSize * fontSize) / changedFontSize + 'px';
+          }
         }
-      }
 
-      recalc();
+        recalc();
 
-      window.addEventListener('resize', recalc);
-    }</script><script>calc(1080); // 设计稿宽度按1080</script><body><div id="app"></div><script defer="defer" src="js/element.d70254698ca80acab84a.js"></script><script defer="defer" src="js/vendor.724cc5a20f0141ef59d4.js"></script><script defer="defer" src="js/main.202276966bec9affab0a.js"></script></body></html>
+        window.addEventListener('resize', recalc);
+      }</script><script>calc(1080); // 设计稿宽度按1080</script><link href="css/main.8c9fc9ea34323293eccc.css" rel="stylesheet"></head><body><div id="app"></div><script defer="defer" src="js/vendor.ab7fadb71e4a1d416ada.js"></script><script defer="defer" src="js/main.40ad438134e32e6d370b.js"></script></body></html>

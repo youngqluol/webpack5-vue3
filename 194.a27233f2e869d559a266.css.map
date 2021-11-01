@@ -1,1 +1,0 @@
-{"version":3,"file":"194.a27233f2e869d559a266.css","mappings":"AACE,6BAEE,cAEA,mBADA,cAEA,kBAJA,YAIJ","sources":["webpack://webpack5-vue3/./src/views/About.vue"],"sourcesContent":["\n  .about-page {\n    width: 5.4rem;\n    height: 5.4rem;\n    margin: 0 auto;\n    line-height: 5.4rem;\n    text-align: center;\n  }\n"],"names":[],"sourceRoot":""}
