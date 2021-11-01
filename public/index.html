@@ -5,35 +5,36 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Webpack5</title>
-  </head>
-  <!-- rem适配 设计稿宽度/100 = 1rem -->
-  <script type="text/javascript">
-    function calc(designWidth) {
-      var html = document.documentElement;
+    <!-- rem适配 设计稿宽度/100 = rem值 -->
+    <script type="text/javascript">
+      function calc(designWidth) {
+        var html = document.documentElement;
 
-      function recalc() {
-        var dpi =
-          html.clientWidth > designWidth ? designWidth : html.clientWidth;
-        // 假设屏幕宽360，则计算公式： designWidth/360 = 100/fontSize
-        var fontSize = parseFloat((dpi / designWidth) * 100);
-        html.style.fontSize = fontSize + 'px';
-        // 解决浏览器及低端安卓版本的webview缩放
-        var changedFontSize = parseFloat(
-          window.getComputedStyle(html)['font-size']
-        );
-        if (Math.abs(fontSize - changedFontSize) > 0.1) {
-          html.style.fontSize = (fontSize * fontSize) / changedFontSize + 'px';
+        function recalc() {
+          var dpi =
+            html.clientWidth > designWidth ? designWidth : html.clientWidth;
+          // 假设屏幕宽360，则计算公式： designWidth/360 = 100/fontSize
+          var fontSize = parseFloat((dpi / designWidth) * 100);
+          html.style.fontSize = fontSize + 'px';
+          // 解决浏览器及低端安卓版本的webview缩放
+          var changedFontSize = parseFloat(
+            window.getComputedStyle(html)['font-size']
+          );
+          if (Math.abs(fontSize - changedFontSize) > 0.1) {
+            html.style.fontSize =
+              (fontSize * fontSize) / changedFontSize + 'px';
+          }
         }
+
+        recalc();
+
+        window.addEventListener('resize', recalc);
       }
-
-      recalc();
-
-      window.addEventListener('resize', recalc);
-    }
-  </script>
-  <script type="text/javascript">
-    calc(1080); // 设计稿宽度按1080
-  </script>
+    </script>
+    <script type="text/javascript">
+      calc(1080); // 设计稿宽度按1080
+    </script>
+  </head>
   <body>
     <div id="app"></div>
   </body>

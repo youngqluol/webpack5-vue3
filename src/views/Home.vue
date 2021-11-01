@@ -4,7 +4,9 @@
     <HelloWorld />
     <div class="img2"></div>
     <router-link to="/about">Go to ahout</router-link>
-    <button @click="addNum">{{ vuexNum }}</button>
+    <el-button type="primary"
+               @click="addNum">点我：{{ vuexNum }}
+    </el-button>
   </div>
 </template>
 <script>
@@ -47,16 +49,17 @@ export default {
 };
 </script>
 <style lang="less" scoped>
-  .main-page {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    .img2 {
-      width: 3rem;
-      height: 3rem;
-      background-image: url('../assets/logo.png');
-      background-size: 3rem 3rem;
+    .main-page {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-top: 2rem;
+      .img2 {
+        width: 3rem;
+        height: 3rem;
+        background-image: url('../assets/logo.png');
+        background-size: 3rem 3rem;
+      }
     }
-  }
 </style>

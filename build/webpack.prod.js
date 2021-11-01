@@ -12,7 +12,7 @@ const commonConfig = require('./webpack.config');
 const plugins = [
   new MiniCssExtractPlugin({
     filename: 'css/[name].[contenthash].css',
-    chunkFilename: '[id].[contenthash].css'
+    chunkFilename: 'css/[id].[contenthash].css'
   })
 ];
 
@@ -54,12 +54,6 @@ module.exports = merge(commonConfig, {
           name: 'vendor',
           test: /[\\/]node_modules[\\/]/,
           priority: 10,
-          chunks: 'initial' // 只打包初始时依赖的第三方
-        },
-        element: {
-          name: 'element',
-          test: /[\\/]node_modules[\\/]element-plus[\\/]/,
-          priority: 20,
           chunks: 'initial' // 只打包初始时依赖的第三方
         }
       }
