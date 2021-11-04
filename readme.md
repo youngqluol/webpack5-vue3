@@ -22,5 +22,5 @@ npm run build --zip
 
 ### 三、最近更新
 #### 1. 【2021-09-17】去掉dll配置，原因参考https://www.cnblogs.com/skychx/p/webpack-dllplugin.html
-#### 2. 【2021-11-1】element-plug改为按需引入
+#### 2. 【2021-11-1】element-plus改为按需引入
 
