@@ -74,7 +74,7 @@ function checkContentType(config) {
   return config;
 }
 
-export default {
+export {
   get,
   post
 };
