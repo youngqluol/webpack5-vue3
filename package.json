@@ -1,7 +1,7 @@
 {
   "name": "webpack5-vue3",
   "version": "1.0.0",
-  "description": "webpack5 vue3 app",
+  "description": "webpack5-vue3 template",
   "private": true,
   "scripts": {
     "precommit": "lint-staged",
