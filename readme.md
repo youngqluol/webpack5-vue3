@@ -17,10 +17,6 @@ npm run build --zip
 
 ### 二、TODOs
 
-#### 1. jest单元测试
+#### 1. vitest单元测试
 #### 2. 支持ts
-
-### 三、最近更新
-#### 1. 【2021-09-17】去掉dll配置，原因参考https://www.cnblogs.com/skychx/p/webpack-dllplugin.html
-#### 2. 【2021-11-1】element-plus改为按需引入
 

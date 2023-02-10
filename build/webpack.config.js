@@ -118,10 +118,10 @@ module.exports = {
   resolve: {
     // 别名及扩展
     alias: {
-      '@': path.resolve(__dirname, '../src'),
-      vue: 'vue/dist/vue.runtime.esm-bundler.js'
+      '@src': path.resolve(__dirname, '../src'),
+      '@components': path.resolve(__dirname, '../components')
     },
-    extensions: ['*', '.js', '.vue', '.json']
+    extensions: ['*', '.js', '.vue', '.json', 'ts']
   },
 
   plugins: [
