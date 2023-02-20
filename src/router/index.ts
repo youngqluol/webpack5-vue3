@@ -1,10 +1,10 @@
-import { createRouter, createWebHashHistory } from 'vue-router';
-import Home from '@/views/Home';
+import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
+import Home from '@src/views/Home.vue';
 
-const routes = [
+const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    redirect: '/home'
+    redirect: '/home',
   },
   {
     path: '/home',
@@ -14,13 +14,13 @@ const routes = [
   {
     path: '/about',
     name: 'about',
-    component: () => import('@/views/About')
+    component: () => import('@src/views/About.vue')
   }
 ];
 
+// 这里采用hash模式，history模式比较麻烦，需要后端支持
+// https://router.vuejs.org/zh/guide/essentials/history-mode.html
 const router = createRouter({
-  // 这里采用hash模式
-  // history模式比较麻烦，需要后端支持：https://router.vuejs.org/zh/guide/essentials/history-mode.html
   history: createWebHashHistory(),
   routes
 });

@@ -4,14 +4,13 @@ const resolve = p => path.resolve(__dirname, p);
 const { VueLoaderPlugin } = require('vue-loader/dist/index');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const webpack = require('webpack');
-
-const devMode = process.env.NODE_ENV !== 'production';
+const ForkTsCheckerPlugin = require('fork-ts-checker-webpack-plugin');
+const { isDevEnv, isProdEnv } = require('./config');
 
 module.exports = {
   target: ['web'],
 
-  entry: resolve('../src/main.js'),
+  entry: resolve('../src/main.ts'),
 
   output: {
     filename: 'js/[name].[contenthash].js',
@@ -30,24 +29,31 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+          isDevEnv ? 'style-loader' : MiniCssExtractPlugin.loader,
           'css-loader'
         ]
       },
       {
         test: /\.less$/,
         use: [
-          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+          isDevEnv ? 'style-loader' : MiniCssExtractPlugin.loader,
           'css-loader',
           'postcss-loader',
           'less-loader'
         ]
       },
       {
-        test: /\.js$/,
+        test: /\.(t|j)sx?$/,
         use: [
           {
             loader: 'babel-loader'
+          },
+          {
+            loader: 'ts-loader',
+            options: {
+              // transpileOnly: true,
+              appendTsSuffixTo: [/\.vue$/]
+            }
           }
         ],
         exclude: /node_modules/
@@ -56,19 +62,19 @@ module.exports = {
         test: /\.vue$/,
         use: ['vue-loader']
       },
-      {
-        test: /\.(vue|js)$/,
-        enforce: 'pre',
-        use: {
-          loader: 'eslint-loader',
-          options: {
-            formatter: require('eslint-friendly-formatter'),
-            emitWarning: false,
-            quiet: process.env.NODE_ENV === 'production'
-          }
-        },
-        include: [resolve('../src')]
-      },
+      // {
+      //   test: /\.(vue|js)$/,
+      //   enforce: 'pre',
+      //   use: {
+      //     loader: 'eslint-loader',
+      //     options: {
+      //       formatter: require('eslint-friendly-formatter'),
+      //       emitWarning: false,
+      //       quiet: process.env.NODE_ENV === 'production'
+      //     }
+      //   },
+      //   include: [resolve('../src')]
+      // },
       // webpack5+ 用4种模块类型，来替换raw-loader/url-loader/file-loader
       // 参考：https://webpack.docschina.org/guides/asset-modules/
       {
@@ -121,7 +127,7 @@ module.exports = {
       '@src': path.resolve(__dirname, '../src'),
       '@components': path.resolve(__dirname, '../components')
     },
-    extensions: ['*', '.js', '.vue', '.json', 'ts']
+    extensions: ['*', '.js', '.vue', '.json', '.ts']
   },
 
   plugins: [
@@ -129,11 +135,36 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: resolve('../public/index.html'),
       filename: 'index.html',
-      inject: 'body'
+      inject: 'body',
+      ...(isProdEnv
+        ? {
+          minify: {
+            removeComments: true,
+            collapseWhitespace: true,
+            removeRedundantAttributes: true,
+            useShortDoctype: true,
+            removeEmptyAttributes: true,
+            removeStyleLinkTypeAttributes: true,
+            keepClosingSlash: true,
+            minifyJS: true,
+            minifyCSS: true,
+            minifyURLs: true,
+          },
+        }
+        : undefined
+      )
     }),
-    // 禁止vue options api，优化打包体积
-    new webpack.DefinePlugin({
-      __VUE_OPTIONS_API__: false
-    })
+    new ForkTsCheckerPlugin(
+      {
+        async: isDevEnv,
+        typescript: {
+          context: resolve('../'),
+          diagnosticOptions: {
+            syntactic: true,
+          },
+          mode: 'write-references',
+        },
+      }
+    )
   ]
 };

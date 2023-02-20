@@ -3,16 +3,10 @@
     <router-view></router-view>
   </div>
 </template>
-<script>
-import { useRoute, useRouter } from 'vue-router';
+<script setup lang='ts'>
+import { testFn } from './utils';
 
-export default {
-  setup() {
-    // console.log('route', useRoute());
-    // const router = useRouter();
-    // router.push({ name: 'home' });
-  }
-};
+testFn('');
 </script>
 <style lang="less" scoped>
   .app-page {

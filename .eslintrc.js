@@ -43,7 +43,7 @@ module.exports = {
         ignores: []
       }
     ],
-    'no-undef': 1,
+    'no-undef': 2,
     'no-console': 0,
     'no-unused-vars': 1,
     'arrow-parens': 0,

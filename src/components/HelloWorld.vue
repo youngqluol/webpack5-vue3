@@ -3,12 +3,7 @@
     welcome to vue3 + webpack5
   </div>
 </template>
-<script>
-export default {
-  name: 'hello-world',
-  setup() {
-  },
-};
+<script setup lang="ts">
 </script>
 <style lang="less" scoped>
 .demo-page {

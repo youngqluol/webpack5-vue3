@@ -5,11 +5,8 @@
          alt="img">
   </div>
 </template>
-<script>
-export default {
-  name: 'about',
-  setup() {}
-};
+<script setup lang='ts'>
+
 </script>
 <style lang="less" scoped>
   .about-page {

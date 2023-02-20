@@ -9,44 +9,32 @@
     </el-button>
   </div>
 </template>
-<script>
-import {
-  ref, reactive, toRefs, computed
-} from 'vue';
+<script setup lang='ts'>
+import { ref, reactive, computed } from 'vue';
 import { useStore } from 'vuex';
-import HelloWorld from '@/components/HelloWorld';
+import HelloWorld from '@src/components/HelloWorld.vue';
 
-export default {
-  components: {
-    HelloWorld
-  },
-  setup() {
-    const num = ref(0);
-    const obj = reactive({ title: 1 });
-    const store = useStore();
-    const vuexNum = computed(() => store.state.num);
-    function fn() {
-      console.log('before promise');
-      return new Promise(resolve => {
-        setTimeout(() => {
-          console.log('promise');
-          resolve();
-        }, 2000);
-      });
-    }
-    async function promiseClick() {
-      await fn();
-      console.log('after promise');
-    }
-    return {
-      num,
-      vuexNum,
-      ...toRefs(obj),
-      promiseClick,
-      addNum: () => store.commit('increment')
-    };
-  }
-};
+const num = ref(0);
+const obj = reactive({ title: 1 });
+const store = useStore();
+const vuexNum = computed(() => store.state.num);
+
+function fn(): Promise<void> {
+  console.log('before promise');
+  return new Promise(resolve => {
+    setTimeout(() => {
+      console.log('promise');
+      resolve();
+    }, 2000);
+  });
+}
+
+async function promiseClick() {
+  await fn();
+  console.log('after promise');
+}
+
+function addNum() { store.commit('increment'); }
 </script>
 <style lang="less" scoped>
     .main-page {
