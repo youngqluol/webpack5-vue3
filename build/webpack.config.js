@@ -51,12 +51,12 @@ module.exports = {
           {
             loader: 'ts-loader',
             options: {
+              appendTsSuffixTo: [/\.vue$/],
               // transpileOnly: true,
-              appendTsSuffixTo: [/\.vue$/]
             }
           }
         ],
-        exclude: /node_modules/
+        include: resolve('../src')
       },
       {
         test: /\.vue$/,
@@ -160,9 +160,16 @@ module.exports = {
         typescript: {
           context: resolve('../'),
           diagnosticOptions: {
+            semantic: true,
             syntactic: true,
           },
           mode: 'write-references',
+          extensions: {
+            vue: {
+              enabled: true,
+              compiler: require.resolve('@vue/compiler-sfc')
+            }
+          }
         },
       }
     )
