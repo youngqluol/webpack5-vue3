@@ -1,4 +1,4 @@
-const path = require('path');
+const path = require('node:path');
 
 const resolve = p => path.resolve(__dirname, p);
 const { VueLoaderPlugin } = require('vue-loader/dist/index');
@@ -6,10 +6,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ForkTsCheckerPlugin = require('fork-ts-checker-webpack-plugin');
 const { isDevEnv, isProdEnv } = require('./config');
+const { resolveApp } = require('./utils');
 
 module.exports = {
-  target: ['web'],
-
   entry: resolve('../src/main.ts'),
 
   output: {
@@ -17,10 +16,23 @@ module.exports = {
     path: resolve('../dist'),
     environment: {
       arrowFunction: false,
-      destructuring: false
+      const: false,
     },
-    clean: true // 在生成文件之前清空 output 目录
+    clean: true, // 在生成文件之前清空 output 目录
   },
+
+  // 持久化缓存：https://webpack.docschina.org/configuration/cache/
+  // cache: {
+  //   type: 'filesystem',
+  //   version: `${Date.now()}`, // TODO
+  //   cacheDirectory: resolveApp('node_modules/.cache'),
+  //   store: 'pack',
+  //   buildDependencies: {
+  //     defaultWebpack: ['webpack/lib/'],
+  //     config: [__filename],
+  //     tsconfig: [resolveApp('tsconfig.json')],
+  //   },
+  // },
 
   module: {
     rules: [
@@ -30,8 +42,8 @@ module.exports = {
         test: /\.css$/,
         use: [
           isDevEnv ? 'style-loader' : MiniCssExtractPlugin.loader,
-          'css-loader'
-        ]
+          'css-loader',
+        ],
       },
       {
         test: /\.less$/,
@@ -39,28 +51,21 @@ module.exports = {
           isDevEnv ? 'style-loader' : MiniCssExtractPlugin.loader,
           'css-loader',
           'postcss-loader',
-          'less-loader'
-        ]
+          'less-loader',
+        ],
       },
       {
         test: /\.(t|j)sx?$/,
         use: [
           {
-            loader: 'babel-loader'
+            loader: 'babel-loader',
           },
-          {
-            loader: 'ts-loader',
-            options: {
-              appendTsSuffixTo: [/\.vue$/],
-              // transpileOnly: true,
-            }
-          }
         ],
-        include: resolve('../src')
+        include: resolve('../src'),
       },
       {
         test: /\.vue$/,
-        use: ['vue-loader']
+        use: ['vue-loader'],
       },
       // {
       //   test: /\.(vue|js)$/,
@@ -81,53 +86,48 @@ module.exports = {
         test: /\.(jpe?g|png|svg|gif)/i,
         type: 'asset',
         generator: {
-          filename: 'imgs/[name][ext]'
+          filename: 'imgs/[name][ext]',
         },
         parser: {
           dataUrlCondition: {
-            maxSize: 10 * 1024
-          }
-        }
+            maxSize: 10 * 1024,
+          },
+        },
       },
       {
         test: /\.(mp4|avi|mp3|wav)$/,
         type: 'asset',
         generator: {
-          filename: 'media/[name][ext]'
+          filename: 'media/[name][ext]',
         },
         parser: {
           dataUrlCondition: {
-            maxSize: 10 * 1024
-          }
-        }
+            maxSize: 10 * 1024,
+          },
+        },
       },
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
         type: 'asset',
         generator: {
-          filename: 'fonts/[name][ext]'
+          filename: 'fonts/[name][ext]',
         },
         parser: {
           dataUrlCondition: {
-            maxSize: 10 * 1024
-          }
-        }
-      }
-    ]
+            maxSize: 10 * 1024,
+          },
+        },
+      },
+    ],
   },
-
-  // 持久化缓存：https://webpack.docschina.org/configuration/cache/
-  // cache: {
-  //   type: 'filesystem'
-  // },
 
   resolve: {
     // 别名及扩展
     alias: {
       '@src': path.resolve(__dirname, '../src'),
-      '@components': path.resolve(__dirname, '../components')
+      '@components': path.resolve(__dirname, '../components'),
     },
-    extensions: ['*', '.js', '.vue', '.json', '.ts']
+    extensions: ['*', '.js', '.vue', '.json', '.ts'],
   },
 
   plugins: [
@@ -138,21 +138,21 @@ module.exports = {
       inject: 'body',
       ...(isProdEnv
         ? {
-          minify: {
-            removeComments: true,
-            collapseWhitespace: true,
-            removeRedundantAttributes: true,
-            useShortDoctype: true,
-            removeEmptyAttributes: true,
-            removeStyleLinkTypeAttributes: true,
-            keepClosingSlash: true,
-            minifyJS: true,
-            minifyCSS: true,
-            minifyURLs: true,
-          },
-        }
+            minify: {
+              removeComments: true,
+              collapseWhitespace: true,
+              removeRedundantAttributes: true,
+              useShortDoctype: true,
+              removeEmptyAttributes: true,
+              removeStyleLinkTypeAttributes: true,
+              keepClosingSlash: true,
+              minifyJS: true,
+              minifyCSS: true,
+              minifyURLs: true,
+            },
+          }
         : undefined
-      )
+      ),
     }),
     new ForkTsCheckerPlugin(
       {
@@ -167,11 +167,11 @@ module.exports = {
           extensions: {
             vue: {
               enabled: true,
-              compiler: require.resolve('@vue/compiler-sfc')
-            }
-          }
+              compiler: require.resolve('@vue/compiler-sfc'),
+            },
+          },
         },
-      }
-    )
-  ]
+      },
+    ),
+  ],
 };

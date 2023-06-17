@@ -1,0 +1,9 @@
+{
+  "extends": "@antfu",
+  "rules": {
+    "@typescript-eslint/semi": "off",
+    "antfu/top-level-function": "off",
+    "curly": "off",
+    "no-console": "warn"
+  }
+}

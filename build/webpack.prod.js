@@ -1,4 +1,4 @@
-const path = require('path');
+const path = require('node:path');
 
 const resolve = p => path.resolve(__dirname, p);
 const { merge } = require('webpack-merge');
@@ -12,8 +12,8 @@ const commonConfig = require('./webpack.config');
 const plugins = [
   new MiniCssExtractPlugin({
     filename: 'css/[name].[contenthash].css',
-    chunkFilename: 'css/[id].[contenthash].css'
-  })
+    chunkFilename: 'css/[id].[contenthash].css',
+  }),
 ];
 
 if (process.env.npm_config_report) {
@@ -32,11 +32,11 @@ if (process.env.npm_config_zip) {
             '../dist/imgs/',
             '../dist/index.html',
             '../dist/js/',
-            '../dist/fonts/'
-          ]
-        }
-      }
-    })
+            '../dist/fonts/',
+          ],
+        },
+      },
+    }),
   );
 }
 
@@ -54,9 +54,9 @@ module.exports = merge(commonConfig, {
           name: 'vendor',
           test: /[\\/]node_modules[\\/]/,
           priority: 10,
-          chunks: 'initial' // 只打包初始时依赖的第三方
-        }
-      }
+          chunks: 'initial', // 只打包初始时依赖的第三方
+        },
+      },
     },
     minimizer: [
       // webpack@5的terser配置，可以使用`...`方式使用webpack默认，也可以引入terser插件后自定义。
@@ -67,13 +67,13 @@ module.exports = merge(commonConfig, {
           compress: {
             passes: 2, // webpack的默认值
             drop_debugger: true,
-            drop_console: process.env.NODE_ENV === 'production' // 生产环境下关闭
-          }
-        }
+            // drop_console: process.env.NODE_ENV === 'production' // 生产环境下关闭
+          },
+        },
       }),
       // css压缩
-      new CssMinimizerPlugin()
+      new CssMinimizerPlugin(),
     ],
-    minimize: true // 是否启用minimizer选项
-  }
+    minimize: true, // 是否启用minimizer选项
+  },
 });

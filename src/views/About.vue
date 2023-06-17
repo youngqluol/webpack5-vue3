@@ -1,13 +1,16 @@
+<script setup lang='ts'>
+</script>
+
 <template>
   <div class="about-page">
     <p>This is about page.</p>
-    <img src="../assets/J.png"
-         alt="img">
+    <img
+      src="../assets/J.png"
+      alt="img"
+    >
   </div>
 </template>
-<script setup lang='ts'>
 
-</script>
 <style lang="less" scoped>
   .about-page {
     width: 5.4rem;

@@ -1,16 +1,5 @@
-<template>
-  <div class="main-page">
-    <p>This is Home page</p>
-    <HelloWorld />
-    <div class="img2"></div>
-    <router-link to="/about">Go to ahout</router-link>
-    <el-button type="primary"
-               @click="addNum">点我：{{ vuexNum }}
-    </el-button>
-  </div>
-</template>
 <script setup lang='ts'>
-import { ref, reactive, computed } from 'vue';
+import { computed, reactive, ref } from 'vue';
 import { useStore } from 'vuex';
 import HelloWorld from '@src/components/HelloWorld.vue';
 
@@ -21,7 +10,7 @@ const vuexNum = computed(() => store.state.num);
 
 function fn(): Promise<void> {
   console.log('before promise');
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     setTimeout(() => {
       console.log('promise');
       resolve();
@@ -34,8 +23,32 @@ async function promiseClick() {
   console.log('after promise');
 }
 
-function addNum() { store.commit('increment'); }
+function addNum() {
+  const obj1 = { a: Math.random() };
+  const { a } = obj1;
+  if (a > 0.5)
+    return;
+  store.commit('increment');
+}
 </script>
+
+<template>
+  <div class="main-page">
+    <p>This is Home page</p>
+    <HelloWorld />
+    <div class="img2" />
+    <router-link to="/about">
+      Go to ahout
+    </router-link>
+    <el-button
+      type="primary"
+      @click="() => { addNum();promiseClick() }"
+    >
+      点我：{{ vuexNum }}
+    </el-button>
+  </div>
+</template>
+
 <style lang="less" scoped>
     .main-page {
       display: flex;

@@ -1,4 +1,5 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
+import type { RouteRecordRaw } from 'vue-router';
+import { createRouter, createWebHashHistory } from 'vue-router';
 import Home from '@src/views/Home.vue';
 
 const routes: RouteRecordRaw[] = [
@@ -9,20 +10,20 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/home',
     name: 'home',
-    component: Home
+    component: Home,
   },
   {
     path: '/about',
     name: 'about',
-    component: () => import('@src/views/About.vue')
-  }
+    component: () => import('@src/views/About.vue'),
+  },
 ];
 
 // 这里采用hash模式，history模式比较麻烦，需要后端支持
 // https://router.vuejs.org/zh/guide/essentials/history-mode.html
 const router = createRouter({
   history: createWebHashHistory(),
-  routes
+  routes,
 });
 
 export default router;

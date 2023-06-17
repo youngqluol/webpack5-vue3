@@ -4,11 +4,11 @@
 #### 1. vue3 + vue-router4 + pinia + webpack5
 #### 2. rem适配
 #### 3. 包分析
-```js
+```cmd
 npm run build --report
 ```
 #### 4. zip包
-```js
+```cmd
 npm run build --zip
 ```
 #### 5. eslint 自动格式化

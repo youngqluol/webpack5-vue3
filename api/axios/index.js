@@ -8,10 +8,10 @@ const config = {
   baseURL,
   timeout,
   headers: {
-    'Content-Type': 'application/x-www-form-urlencoded'
+    'Content-Type': 'application/x-www-form-urlencoded',
   },
   params: {},
-  data: {}
+  data: {},
   // withCredentials: false, // 跨域请求时是否需要使用凭证
   // responseType: 'json' // 服务器响应的数据类型,可以是 'arraybuffer', 'blob', 'document', 'json', 'text', 'stream'
 };
@@ -20,54 +20,54 @@ const instance = axios.create(config);
 
 // 请求拦截
 instance.interceptors.request.use(
-  config => {
+  (config) => {
     let _config = checkUrl(config);
     _config = checkContentType(_config);
     return _config;
   },
-  error => {
+  (error) => {
     return Promise.reject(error);
-  }
+  },
 );
 
-const get = getConfig => {
+function get(getConfig) {
   return new Promise((resolve, reject) => {
     instance({ method: 'get', ...getConfig }).then(
-      res => {
+      (res) => {
         resolve(res.data);
       },
-      err => {
+      (err) => {
         reject(err);
-      }
+      },
     );
   });
-};
+}
 
-const post = postConfig => {
+function post(postConfig) {
   return new Promise((resolve, reject) => {
     instance({ method: 'post', ...postConfig }).then(
-      res => {
+      (res) => {
         resolve(res.data);
       },
-      err => {
+      (err) => {
         reject(err);
-      }
+      },
     );
   });
-};
+}
 
 function checkUrl(config) {
   if (config.url && config.url.slice(0, 1) !== '/') {
-    config.url = '/' + config.url;
+    config.url = `/${config.url}`;
   }
   return config;
 }
 
 function checkContentType(config) {
   if (
-    config.data &&
-    Object.keys(config.data).length > 0 &&
-    config.headers['Content-Type'] === 'application/x-www-form-urlencoded'
+    config.data
+    && Object.keys(config.data).length > 0
+    && config.headers['Content-Type'] === 'application/x-www-form-urlencoded'
   ) {
     config.data = qs.stringify(config.data);
   }
@@ -76,5 +76,5 @@ function checkContentType(config) {
 
 export {
   get,
-  post
+  post,
 };
