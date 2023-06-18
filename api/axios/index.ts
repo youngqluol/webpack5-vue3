@@ -1,5 +1,5 @@
-import axios from 'axios';
-import qs from 'qs';
+import axios, { type AxiosRequestConfig } from 'axios';
+import { checkContentType, checkUrl } from './utils';
 
 const baseURL = 'api';
 const timeout = 80000;
@@ -13,7 +13,6 @@ const config = {
   params: {},
   data: {},
   // withCredentials: false, // 跨域请求时是否需要使用凭证
-  // responseType: 'json' // 服务器响应的数据类型,可以是 'arraybuffer', 'blob', 'document', 'json', 'text', 'stream'
 };
 
 const instance = axios.create(config);
@@ -30,7 +29,7 @@ instance.interceptors.request.use(
   },
 );
 
-function get(getConfig) {
+function get(getConfig: AxiosRequestConfig): Promise<any> {
   return new Promise((resolve, reject) => {
     instance({ method: 'get', ...getConfig }).then(
       (res) => {
@@ -43,7 +42,7 @@ function get(getConfig) {
   });
 }
 
-function post(postConfig) {
+function post(postConfig: AxiosRequestConfig): Promise<any> {
   return new Promise((resolve, reject) => {
     instance({ method: 'post', ...postConfig }).then(
       (res) => {
@@ -54,24 +53,6 @@ function post(postConfig) {
       },
     );
   });
-}
-
-function checkUrl(config) {
-  if (config.url && config.url.slice(0, 1) !== '/') {
-    config.url = `/${config.url}`;
-  }
-  return config;
-}
-
-function checkContentType(config) {
-  if (
-    config.data
-    && Object.keys(config.data).length > 0
-    && config.headers['Content-Type'] === 'application/x-www-form-urlencoded'
-  ) {
-    config.data = qs.stringify(config.data);
-  }
-  return config;
 }
 
 export {

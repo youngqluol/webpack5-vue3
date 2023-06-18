@@ -9,11 +9,11 @@ const { isDevEnv, isProdEnv } = require('./config');
 const { resolveApp } = require('./utils');
 
 module.exports = {
-  entry: resolve('../src/main.ts'),
+  entry: resolveApp('src/main.ts'),
 
   output: {
     filename: 'js/[name].[contenthash].js',
-    path: resolve('../dist'),
+    path: resolveApp('dist'),
     environment: {
       arrowFunction: false,
       const: false,
@@ -22,22 +22,21 @@ module.exports = {
   },
 
   // 持久化缓存：https://webpack.docschina.org/configuration/cache/
-  // cache: {
-  //   type: 'filesystem',
-  //   version: `${Date.now()}`, // TODO
-  //   cacheDirectory: resolveApp('node_modules/.cache'),
-  //   store: 'pack',
-  //   buildDependencies: {
-  //     defaultWebpack: ['webpack/lib/'],
-  //     config: [__filename],
-  //     tsconfig: [resolveApp('tsconfig.json')],
-  //   },
-  // },
+  cache: {
+    type: 'filesystem',
+    cacheDirectory: resolveApp('node_modules/.cache'),
+    store: 'pack',
+    buildDependencies: {
+      defaultWebpack: ['webpack/lib/'],
+      config: [__filename],
+      tsconfig: [resolveApp('tsconfig.json')],
+    },
+  },
 
   module: {
     rules: [
-      // style-loader: 使用多个style标签将CSS插入到DOM中，反应快
-      // MiniCssExtractPlugin: 将css抽离成单独的CSS文件，并行加载
+      // 【style-loader】: 使用多个style标签将CSS插入到DOM中，反应快
+      // 【MiniCssExtractPlugin】: 将css抽离成单独的CSS文件，并行加载
       {
         test: /\.css$/,
         use: [
@@ -67,6 +66,7 @@ module.exports = {
         test: /\.vue$/,
         use: ['vue-loader'],
       },
+      // TODO 构建时显示eslint错误信息
       // {
       //   test: /\.(vue|js)$/,
       //   enforce: 'pre',
@@ -80,8 +80,6 @@ module.exports = {
       //   },
       //   include: [resolve('../src')]
       // },
-      // webpack5+ 用4种模块类型，来替换raw-loader/url-loader/file-loader
-      // 参考：https://webpack.docschina.org/guides/asset-modules/
       {
         test: /\.(jpe?g|png|svg|gif)/i,
         type: 'asset',
@@ -127,7 +125,7 @@ module.exports = {
       '@src': path.resolve(__dirname, '../src'),
       '@components': path.resolve(__dirname, '../components'),
     },
-    extensions: ['*', '.js', '.vue', '.json', '.ts'],
+    extensions: ['*', '.ts', '.js', '.vue', '.json'],
   },
 
   plugins: [

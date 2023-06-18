@@ -3,7 +3,7 @@ module.exports = {
     [
       'autoprefixer',
       {
-        // 选项
+        // options
       },
     ],
   ],

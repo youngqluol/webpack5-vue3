@@ -1,6 +1,6 @@
 import { get } from './axios';
 
-// 示例
+// example
 export function getCommonInfo() {
   return get({
     url: 'get/commonInfo',
