@@ -1,50 +1,26 @@
 <script setup lang='ts'>
-import { computed, reactive, ref } from 'vue';
-import { useStore } from 'vuex';
+import { storeToRefs } from 'pinia';
 import HelloWorld from '@src/components/HelloWorld.vue';
+import useCounterStore from '@src/store';
 
-const num = ref(0);
-const obj = reactive({ title: 1 });
-const store = useStore();
-const vuexNum = computed(() => store.state.num);
-
-function fn(): Promise<void> {
-  console.log('before promise');
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      console.log('promise');
-      resolve();
-    }, 2000);
-  });
-}
-
-async function promiseClick() {
-  await fn();
-  console.log('after promise');
-}
-
-function addNum() {
-  const obj1 = { a: Math.random() };
-  const { a } = obj1;
-  if (a > 0.5)
-    return;
-  store.commit('increment');
-}
+const counterStore = useCounterStore();
+const { count } = storeToRefs(counterStore);
+const { increment } = counterStore;
 </script>
 
 <template>
   <div class="main-page">
-    <p>This is Home page</p>
+    <p>Home page</p>
     <HelloWorld />
     <div class="img2" />
     <router-link to="/about">
-      Go to ahout
+      Go to ahout page
     </router-link>
     <el-button
       type="primary"
-      @click="() => { addNum();promiseClick() }"
+      @click="() => { increment() }"
     >
-      点我：{{ vuexNum }}
+      点我+1 {{ count }}
     </el-button>
   </div>
 </template>

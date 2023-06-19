@@ -5,6 +5,7 @@ const { VueLoaderPlugin } = require('vue-loader/dist/index');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ForkTsCheckerPlugin = require('fork-ts-checker-webpack-plugin');
+const { DefinePlugin } = require('webpack');
 const { isDevEnv, isProdEnv } = require('./config');
 const { resolveApp } = require('./utils');
 
@@ -60,26 +61,12 @@ module.exports = {
             loader: 'babel-loader',
           },
         ],
-        include: resolve('../src'),
+        include: resolveApp('src'),
       },
       {
         test: /\.vue$/,
         use: ['vue-loader'],
       },
-      // TODO 构建时显示eslint错误信息
-      // {
-      //   test: /\.(vue|js)$/,
-      //   enforce: 'pre',
-      //   use: {
-      //     loader: 'eslint-loader',
-      //     options: {
-      //       formatter: require('eslint-friendly-formatter'),
-      //       emitWarning: false,
-      //       quiet: process.env.NODE_ENV === 'production'
-      //     }
-      //   },
-      //   include: [resolve('../src')]
-      // },
       {
         test: /\.(jpe?g|png|svg|gif)/i,
         type: 'asset',
@@ -129,9 +116,12 @@ module.exports = {
   },
 
   plugins: [
+    new DefinePlugin({
+      __VUE_OPTIONS_API__: JSON.stringify(false),
+    }),
     new VueLoaderPlugin(),
     new HtmlWebpackPlugin({
-      template: resolve('../public/index.html'),
+      template: resolveApp('public/index.html'),
       filename: 'index.html',
       inject: 'body',
       ...(isProdEnv

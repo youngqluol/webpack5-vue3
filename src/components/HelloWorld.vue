@@ -1,13 +1,11 @@
-<script setup lang="ts">
+<script setup lang='ts'>
 </script>
 
 <template>
-  <div class="demo-page">
+  <div>
     welcome to vue3 + webpack5
   </div>
 </template>
 
-<style lang="less" scoped>
-.demo-page {
-}
+<style lang='less' scoped>
 </style>

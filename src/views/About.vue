@@ -4,10 +4,6 @@
 <template>
   <div class="about-page">
     <p>This is about page.</p>
-    <img
-      src="../assets/J.png"
-      alt="img"
-    >
   </div>
 </template>
 

@@ -4,12 +4,11 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Webpack5</title>
+    <title>webpack5 + vue3 + ts</title>
     <!-- rem适配 设计稿宽度/100 = rem值 -->
     <script type="text/javascript">
       function calc(designWidth) {
         var html = document.documentElement;
-
         function recalc() {
           var dpi =
             html.clientWidth > designWidth ? designWidth : html.clientWidth;
@@ -25,9 +24,7 @@
               (fontSize * fontSize) / changedFontSize + 'px';
           }
         }
-
         recalc();
-
         window.addEventListener('resize', recalc);
       }
     </script>
